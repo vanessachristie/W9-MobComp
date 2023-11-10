@@ -14,6 +14,8 @@
 		0447400C2AFDB81B00A20890 /* W9_MobCompTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447400B2AFDB81B00A20890 /* W9_MobCompTests.swift */; };
 		044740162AFDB81B00A20890 /* W9_MobCompUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044740152AFDB81B00A20890 /* W9_MobCompUITests.swift */; };
 		044740182AFDB81B00A20890 /* W9_MobCompUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044740172AFDB81B00A20890 /* W9_MobCompUITestsLaunchTests.swift */; };
+		044740272AFDBAC200A20890 /* WOT-Scryfall.json in Resources */ = {isa = PBXBuildFile; fileRef = 044740262AFDBAC200A20890 /* WOT-Scryfall.json */; };
+		044740292AFDBD9700A20890 /* MTGCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044740282AFDBD9700A20890 /* MTGCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		044740112AFDB81B00A20890 /* W9-MobCompUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "W9-MobCompUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		044740152AFDB81B00A20890 /* W9_MobCompUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = W9_MobCompUITests.swift; sourceTree = "<group>"; };
 		044740172AFDB81B00A20890 /* W9_MobCompUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = W9_MobCompUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		044740262AFDBAC200A20890 /* WOT-Scryfall.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "WOT-Scryfall.json"; path = "../../../Downloads/WOT-Scryfall.json"; sourceTree = "<group>"; };
+		044740282AFDBD9700A20890 /* MTGCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			children = (
 				04473FFA2AFDB81900A20890 /* W9_MobCompApp.swift */,
 				04473FFC2AFDB81900A20890 /* ContentView.swift */,
+				044740282AFDBD9700A20890 /* MTGCard.swift */,
+				044740262AFDBAC200A20890 /* WOT-Scryfall.json */,
 				04473FFE2AFDB81B00A20890 /* Assets.xcassets */,
 				044740002AFDB81B00A20890 /* Preview Content */,
 			);
@@ -233,6 +239,7 @@
 			files = (
 				044740022AFDB81B00A20890 /* Preview Assets.xcassets in Resources */,
 				04473FFF2AFDB81B00A20890 /* Assets.xcassets in Resources */,
+				044740272AFDBAC200A20890 /* WOT-Scryfall.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04473FFD2AFDB81900A20890 /* ContentView.swift in Sources */,
+				044740292AFDBD9700A20890 /* MTGCard.swift in Sources */,
 				04473FFB2AFDB81900A20890 /* W9_MobCompApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
