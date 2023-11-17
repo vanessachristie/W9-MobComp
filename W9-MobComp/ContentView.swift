@@ -261,27 +261,43 @@ struct MTGCardView: View {
             }
             
         }
-        .sheet(isPresented: $isImagePopupVisible) {
-                          
-                            if let largeImageUrl = URL(string: card[currentIndex].image_uris?.large ?? "") {
-                                AsyncImage(url: largeImageUrl) { phase in
-                                    switch phase {
-                                    case .success(let image):
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    case .failure:
-                                        Text("Failed to load image")
-                                    case .empty:
-                                        ProgressView()
-                                    @unknown default:
-                                        ProgressView()
-                                    }
+        .overlay(
+            isImagePopupVisible ? AnyView(
+                ZStack {
+                    Color.black.opacity(0.5).ignoresSafeArea()
+                    
+                    VStack {
+                        if let largeImageUrl = URL(string: card[currentIndex].image_uris?.large ?? "") {
+                            AsyncImage(url: largeImageUrl) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                case .failure:
+                                    Text("Failed to load image")
+                                case .empty:
+                                    ProgressView()
+                                @unknown default:
+                                    ProgressView()
                                 }
-                                .padding()
                             }
+                            .padding()
                         }
+                        
+                        Button("Close") {
+                            isImagePopupVisible.toggle()
+                        }
+                        .foregroundColor(.blue)
+                        .padding()
+                    }
+                }
+                .onTapGesture {
+                    isImagePopupVisible.toggle()
+                }
+            ) : AnyView(EmptyView())
+        )
         
     }
     private func navigateToPreviousCard() {
