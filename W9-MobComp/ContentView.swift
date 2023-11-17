@@ -14,6 +14,8 @@ struct MTGCardView: View {
     @State private var isShowingRulings = false
     @State private var currentIndex: Int
     @State private var selectedButton: String?
+    @State private var isArtCrop = true
+        @State private var isImagePopupVisible = false
     
     init(card: [MTGCard], currentIndex: Int) {
         self.card = card
@@ -24,25 +26,28 @@ struct MTGCardView: View {
         ScrollView {
             VStack(spacing: 16) {
                 // Display card image
-                AsyncImage(url: URL(string: card[currentIndex].image_uris?.large ?? "")) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                    case .failure:
-                        Image(systemName: "exclamationmark.triangle")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(.red)
-                            .cornerRadius(15)
-                    case .empty:
-                        ProgressView()
-                    @unknown default:
-                        ProgressView()
-                    }
+                AsyncImage(url: URL(string: card[currentIndex].image_uris?.art_crop ?? "")) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                    case .failure:
+                                        Image(systemName: "exclamationmark.triangle")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(.red)
+                                    case .empty:
+                                        ProgressView()
+                                    @unknown default:
+                                        ProgressView()
+                                    }
                 }
+                .onTapGesture {
+                        
+                                        isImagePopupVisible.toggle()
+                                    
+                                }
                 .frame(maxHeight: 200)
                 HStack {
                     Button(action: {
@@ -256,6 +261,27 @@ struct MTGCardView: View {
             }
             
         }
+        .sheet(isPresented: $isImagePopupVisible) {
+                          
+                            if let largeImageUrl = URL(string: card[currentIndex].image_uris?.large ?? "") {
+                                AsyncImage(url: largeImageUrl) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    case .failure:
+                                        Text("Failed to load image")
+                                    case .empty:
+                                        ProgressView()
+                                    @unknown default:
+                                        ProgressView()
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
         
     }
     private func navigateToPreviousCard() {
