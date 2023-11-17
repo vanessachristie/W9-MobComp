@@ -25,7 +25,6 @@ struct MTGCardView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // Display card image
                 AsyncImage(url: URL(string: card[currentIndex].image_uris?.art_crop ?? "")) { phase in
                                     switch phase {
                                     case .success(let image):
@@ -204,11 +203,11 @@ struct MTGCardView: View {
                     
                     if let legalities = card[currentIndex].legalities {
                         let legalitiesArray = Array(Mirror(reflecting: legalities).children)
-                        let midpoint = legalitiesArray.count / 2
+                      
                         
                         HStack(spacing: 16) {
                             VStack(spacing: 4) {
-                                ForEach(0..<midpoint, id: \.self) { index in
+                                ForEach(0..<legalitiesArray.count, id: \.self) { index in
                                 
                                     HStack {
                                         Button(action: {
@@ -231,28 +230,6 @@ struct MTGCardView: View {
                             }
                             
 
-                            VStack(spacing: 4) {
-                                ForEach(midpoint..<legalitiesArray.count, id: \.self) { index in
-                                    
-                                    HStack {
-                                        Button(action: {
-                                      
-                                        }) {
-                                            Text(legalitiesArray[index].value as? String == "legal" ? "Legal" : "Not Legal")
-                                                .foregroundColor(.white)
-                                                .padding(.horizontal, 12)
-                                                .padding(.vertical, 6)
-                                                .frame(width: 100)
-                                                .background((legalitiesArray[index].value as? String == "legal") ? Color.green : Color.gray)
-                                                .cornerRadius(8)
-                                        }
-                                        Spacer()
-                                        Text("\(legalitiesArray[index].label?.capitalized ?? "")")
-                                            .foregroundColor(.black)
-                                    }
-                                    .padding(.top, 4)
-                                }
-                            }
                         }
                         .padding(.horizontal, 16)
                     }
@@ -289,7 +266,7 @@ struct MTGCardView: View {
                         Button("Close") {
                             isImagePopupVisible.toggle()
                         }
-                        .foregroundColor(.blue)
+                        .foregroundColor(.white)
                         .padding()
                     }
                 }
